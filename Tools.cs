@@ -16,7 +16,7 @@ namespace Kelecik
         private static IEnumerator ExecuteRoutine(float initValue, float endValue, float duration, UnityAction<float> currentValue)
         {
             float elapsedTime = 0f;
-            float valueToLerp = 0f;
+            float valueToLerp = initValue;
             while (Math.Abs(valueToLerp - endValue) > 0f)
             {
                 valueToLerp = Mathf.Lerp(initValue, endValue, elapsedTime / duration);
