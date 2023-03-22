@@ -6,14 +6,16 @@ using UnityEngine.Events;
 
 namespace Kelecik
 {
-    public static class Tools 
+    public static class Tools
     {
-        public static Coroutine Lerp(this MonoBehaviour monoBehaviour, float initValue, float endValue, float duration, UnityAction<float> currentValue)
+        public static Coroutine Lerp(this MonoBehaviour monoBehaviour, float initValue, float endValue, float duration,
+            UnityAction<float> currentValue)
         {
             return monoBehaviour.StartCoroutine(ExecuteRoutine(initValue, endValue, duration, currentValue));
         }
 
-        private static IEnumerator ExecuteRoutine(float initValue, float endValue, float duration, UnityAction<float> currentValue)
+        private static IEnumerator ExecuteRoutine(float initValue, float endValue, float duration,
+            UnityAction<float> currentValue)
         {
             float elapsedTime = 0f;
             float valueToLerp = initValue;
@@ -25,7 +27,11 @@ namespace Kelecik
                 yield return null;
             }
         }
+
+        private static IEnumerator OnCoroutineComplete(this IEnumerator coroutine, Action onComplete)
+        {
+            yield return coroutine;
+            onComplete?.Invoke();
+        }
     }
 }
-
-
